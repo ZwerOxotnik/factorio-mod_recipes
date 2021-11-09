@@ -5,7 +5,6 @@ local data_raw = data.raw
 local items = data_raw.item
 local recipes = data_raw.recipe
 local armors = data_raw.armor
-local tinsert = table.insert
 local deepcopy = util.table.deepcopy
 local speed_multiplier = settings.startup["mod_recipes_speed_multiplier"].value
 local recipe_multiplier = settings.startup["mod_recipes_multiplier"].value
@@ -91,15 +90,19 @@ mod_recipes_lib.make_recipe = function(recipe_name)
 	end
 	multiply_results(new_recipe)
 
-	if new_recipe.energy_required then
-		new_recipe.energy_required = original_recipe.energy_required / speed_multiplier
-	end
+	local is_changed_energy_required = false
 	local normal = new_recipe.normal
 	local expensive = new_recipe.expensive
 	if normal and normal.energy_required then
-		normal.energy_required = original_recipe.normal.energy_required / speed_multiplier
-	elseif expensive and expensive.energy_required then
-		expensive.energy_required = original_recipe.expensive.energy_required / speed_multiplier
+		is_changed_energy_required= true
+		normal.energy_required = recipe_multiplier * normal.energy_required / speed_multiplier
+	end
+	if expensive and expensive.energy_required then
+		is_changed_energy_required = true
+		expensive.energy_required = recipe_multiplier * expensive.energy_required / speed_multiplier
+	end
+	if new_recipe.energy_required or is_changed_energy_required == false then
+		new_recipe.energy_required = recipe_multiplier * (original_recipe.energy_required or 0.5) / speed_multiplier
 	end
 
 	new_recipe.name = "x" .. recipe_multiplier .. "_" .. original_recipe.name
