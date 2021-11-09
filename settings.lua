@@ -10,7 +10,7 @@ data:extend({
 		type = "int-setting",
 		name = "mod_recipes_multiplier",
 		setting_type = "startup",
-		default_value = 100,
+		default_value = 40,
 		minimum_value = 1,
 		maximum_value = 1000000
 	}
