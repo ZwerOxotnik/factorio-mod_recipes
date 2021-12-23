@@ -11,8 +11,7 @@ local recipe_multiplier = settings.startup["mod_recipes_multiplier"].value
 
 ---@return boolean # is multiplied?
 local function _multiply_ingredients(ingredients)
-	for i=1, #ingredients do
-		local ingredient = ingredients[i]
+	for _, ingredient in pairs(ingredients) do
 		if ingredient[2] then
 			ingredient[2] = ingredient[2] * recipe_multiplier
 			if ingredient[2] >= 65535 then return false end
