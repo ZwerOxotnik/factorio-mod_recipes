@@ -84,7 +84,7 @@ License
 
 I'm interested in distributing code as freely as possible.
 
-Copyright (c) 2021 ZwerOxotnik <zweroxotnik@gmail.com>
+Copyright (c) 2021, 2024 ZwerOxotnik <zweroxotnik@gmail.com>
 
 Licensed under the [MIT licence](https://tldrlegal.com/license/mit-license).
 

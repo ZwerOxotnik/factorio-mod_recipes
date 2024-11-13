@@ -19,31 +19,31 @@ script.on_configuration_changed(adapt_multiplied_recipes)
 
 
 script.on_event(defines.events.on_research_reversed, function(event)
-	local effects = event.research.effects
+	local effects = event.research.prototype.effects
 	local force = event.research.force
 	local recipes = force.recipes
 	for i=1, #effects do
 		local effect = effects[i]
 		if effect.type == "unlock-recipe" then
-				local recipe = recipes["x" .. recipe_multiplier .. "_" .. effect.recipe]
-				if recipe then
-					recipe.enabled = false
-				end
+			local recipe = recipes["x" .. recipe_multiplier .. "_" .. effect.recipe]
+			if recipe then
+				recipe.enabled = false
+			end
 		end
 	end
 end)
 
 script.on_event(defines.events.on_research_finished, function(event)
-	local effects = event.research.effects
+	local effects = event.research.prototype.effects
 	local force = event.research.force
 	local recipes = force.recipes
 	for i=1, #effects do
 		local effect = effects[i]
 		if effect.type == "unlock-recipe" then
-				local recipe = recipes["x" .. recipe_multiplier .. "_" .. effect.recipe]
-				if recipe then
-					recipe.enabled = true
-				end
+			local recipe = recipes["x" .. recipe_multiplier .. "_" .. effect.recipe]
+			if recipe then
+				recipe.enabled = true
+			end
 		end
 	end
 end)
